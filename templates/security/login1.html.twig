@@ -1,0 +1,30 @@
+{% extends 'registration/register.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+
+<body class="text-center">
+<main class="form-signin">
+    {% if error %}
+        <div class="alert alert-danger" xmlns="http://www.w3.org/1999/html">Неверные учетные данные</div>
+    {% endif %}
+    <form method="post">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <div class="form-floating">
+            <input type="email" class="form-control" name="email" id="inputEmail"  placeholder="Email">
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" name="password" id="inputPassword"  placeholder="Password" required>
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign UP</button>
+    </form>
+</main>
+
+
+</body>
+{% endblock %}

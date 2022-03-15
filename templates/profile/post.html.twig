@@ -1,0 +1,152 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+<style>
+    .pos {
+        margin:6rem;
+        pading:1rem;
+        /*pading:6rem;*/
+    }
+
+    .card {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #343a40;
+        background-clip: border-box;
+        border: 1px solid rgba(22, 27, 34, 1);
+        border-radius: 0.25rem;
+    }
+
+    .cardsa {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        /*display: inline-block;*/
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #343a40;
+        background-clip: border-box;
+        /*border: 1px solid rgba(52, 58, 64, 1);*/
+        border-radius: 0.25rem;
+    }
+
+    .card-header {
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: rgb(1 35 35 / 30%);
+        border-bottom: 1px solid rgb(114 60 60 / 13%);
+    }
+
+    .card-footer {
+        padding: 0.75rem 1.25rem;
+        background-color: rgba(1 35 35 / 30%);
+        border-top: 1px solid rgba(52, 58, 64, 1);
+    }
+
+    .list-group-item:first-child {
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
+
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: -1px;
+        background-color: #343a40;
+        border: 1px solid rgba(0,0,0,.125);
+    }
+
+
+    .card-deck {
+        /*margin:  -15px;*/
+        display: flex;
+        justify-content: flex-start;
+        /*flex-flow: row wrap;*/
+        align-items: stretch;
+    }
+    .card-deck .card {
+        margin: 1rem;
+        /*display: block;*/
+        flex-basis: 20.3%; /* change this value for each breakpoint*/
+    }
+
+    .card-columns {
+
+        column-count: 4;
+
+    }
+
+
+    .card-img-top {
+        width: 30%;
+        border-top-left-radius: calc(0.25rem - 1px);
+        border-top-right-radius: calc(0.25rem - 1px);
+    }
+
+    .card-text{
+        color: #ced4da;
+        font-weight: 400!important;
+    }
+
+</style>
+
+
+        <div class="pos">
+            <div class="card" >
+                <img class="card-img-top" src="{{ collection.image}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ collection.name }}</h5>
+                    <h5 class="card-title">{{ collection.title }}</h5>
+                    <p class="card-text">{{ collection.description }}</p>
+                    <a href="{{ url('add', {id: collection.id}) }}" class="btn btn-outline-success my-2 my-sm-0">Add Item</a>
+                    <a href="{{ url('add', {id: collection.id}) }}" class="btn btn-outline-success my-2 my-sm-0">Remove Item</a>
+                </div>
+            </div>
+        </div>
+
+    <div class="pos">
+        <div class="card-deck">
+        {% for item in items %}
+                <div class="card " style="width:500px;" >
+                    <div class="card-header">{{ item.name }}</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.tag}}</h5>
+                        <p class="card-text">{{ item.text }}</p>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <li class="list-group-item">{{ item.line }}</li>
+                        <li class="list-group-item">{{ item.number }}</li>
+                        <li class="list-group-item">{{  item.date|date('d-m-Y')}}</li>
+                    </div>
+                    <div class="card-body">
+                        <a href="#" class="btn btn-outline-success my-2 my-sm-0">Change Item</a>
+                        <a href="{{ path('delete_item', {item_id:item.id}) }}" class="btn btn-outline-danger">Delete Item</a>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Created at {{ item.createdAt|date('d-m-Y h:i:s') }}</small>
+                    </div>
+                </div>
+
+
+                {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

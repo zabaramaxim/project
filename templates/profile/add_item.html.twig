@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <style xmlns="http://www.w3.org/1999/html">
+        .pos {
+            margin:6rem;
+            pading:1rem;
+        }
+
+        label {
+            display: block;
+            font: 1rem 'Fira Sans', sans-serif;
+        }
+
+        input,
+        label {
+            margin: .4rem 0;
+        }
+    </style>
+    <div class="pos">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+        {{ form_label(form.tag) }}
+        {{ form_widget(form.tag) }}
+        {{ form_label(form.text) }}
+        {{ form_widget(form.text) }}
+        {{ form_label(form.line) }}
+        {{ form_widget(form.line) }}
+        {{ form_label(form.number) }}
+        {{ form_widget(form.number) }}
+        {{ form_label(form.date) }}
+{#        {{ form_widget(form.date) }}#}
+        {{ form_widget(form.date) }}
+        {{ form_end(form) }}
+    </div>
+
+
+
+{% endblock %}

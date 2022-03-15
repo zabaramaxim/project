@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block home %}
+
+    {% for flashSucces in app.flashes('success') %}
+        <div class="alert alert-success" role="alert">{{ flashSucces }}</div>
+    {% endfor %}
+<style>
+    .pos {
+        margin:6rem;
+        pading:1rem;
+    }
+    .card {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: reverse;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #343a40;
+        background-clip: border-box;
+        border: 1px solid rgba(0,0,0,.125);
+        border-radius: 0.25rem;
+    }
+
+    @media (min-width: 100px) {
+        .card-columns {
+            -webkit-column-count: 3;
+            column-count: 3
+        }
+    }
+
+    .card-text{
+        color: #ced4da;
+        font-weight: 400!important;
+    }
+</style>
+
+
+<div class="pos">
+    <div class="card-deck">
+        {% for collection in collections %}
+            <div class="card">
+                <img class="card-img-top" src="{{ collection.image }}" width="348" height="180" alt="Card image cap">
+                    <div class="card-body">
+    {#                    <h5 class="card-title">{{ collection.name }}</h5>#}
+    {#                    <h6 class="card-subtitle mb-2 text-muted">{{ collection.title }}</h6>#}
+                        <h5 class="text" >{{ collection.name }}</h5>
+{#                        <h6 class="card-subtitle mb-2 text-muted">{{ collection.title }}</h6>#}
+                        <h6 class="card-subtitle mb-2 text-muted">{{ collection.user.username }}</h6>
+                        <p class="card-text">{{ collection.description }}</p>
+                        <a href="{{ path('post_view',{id: collection.id}) }}" class="card-link">Check Collection</a>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

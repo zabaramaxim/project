@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block home %}
+
+    {% for flashSucces in app.flashes('success') %}
+        <div class="alert alert-success" role="alert">{{ flashSucces }}</div>
+    {% endfor %}
+    <style>
+        .pos {
+            margin:6rem;
+            pading:1rem;
+        }
+        .card {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: reverse;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #343a40;
+            background-clip: border-box;
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: 0.25rem;
+
+        }
+
+        .card-columns {
+
+            column-count: 4;
+        }
+
+        .card-text{
+            color: #ced4da;
+            font-weight: 400!important;
+        }
+    </style>
+    <div class="pos">
+        <h5>Добро пожаловать {{ username }}, здесь вы можете<a href="{{ path('create') }}">Создовать свои коллекции</a>, а так же просматривать и добавлять в них новые предметы</h5>
+    </div>
+    <div class="pos">
+        <div class="card-columns">
+            {% for collection in collections %}
+                <div class="card" style="max-width: 30rem;">
+                    <img class="card-img-top" src="{{ collection.image }}" width="348" height="180" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="text" >{{ collection.name }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ collection.user.username }}</h6>
+                        <p class="card-text">{{ collection.title }}</p>
+                        <a href="{{ path('post',{id: collection.id}) }}" class="btn btn-outline-success my-2 my-sm-0">Check Collection</a>
+                        <a href="{{ path('delete',{id: collection.id}) }}" class="btn btn-outline-danger">Delete Collection</a>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+    </div>
+
+{% endblock %}

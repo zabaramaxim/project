@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+
+    {% for flashError in app.flashes('error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <form action="{{ path('create') }}" method="post" enctype="multipart/form-data">
+            {{ form_start(form) }}
+
+            {{ form_errors(form) }}
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+        <div class="mb-3">
+            <label for="item_collection_image" class="form-label required">Image</label>
+            <input type="file" id="file" name="file" required="required" class="form-control">
+
+        </div>
+        {{ form_end(form) }}
+
+    </form>
+
+{% endblock %}

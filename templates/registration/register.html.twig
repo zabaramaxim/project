@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% block style %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+    {% for flashSucces in app.flashes('error') %}
+        <div class="alert alert-success" role="alert">{{ flashSucces }}</div>
+    {% endfor %}
+<style>
+
+    .text-center {
+        text-align: center!important;
+    }
+
+    .form-signin {
+        width: 100%;
+        max-width: 500px;
+        padding: 10px;
+        margin: auto;
+    }
+
+    .fw-normal {
+        font-weight: 400!important;
+    }
+
+    .form-floating {
+        position: relative;
+    }
+
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #21c5cb;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0.25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    input[type="email" i] {
+        padding: 1px 2px;
+    }
+
+    form-floating>.form-control {
+        padding: 1rem 0.75rem;
+    }
+    .form-floating>.form-control, .form-floating>.form-select {
+        height: calc(3.5rem + 2px);
+        line-height: 1.25;
+    }
+    button, input, optgroup, select, textarea {
+        margin: 0;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+</style>
+{% endblock %}
+{% block body%}
+    {% for flash in app.flashes('error') %}
+        <div class="alert alert-danger" role="alert">{{ flash }}</div>
+    {% endfor %}
+<body class="text-center">
+<main class="form-signin">
+    <form method="post">
+        {{ form_start(registrationForm) }}
+        {{ form_errors(registrationForm) }}
+        <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" placeholder="Email" {{ form_widget(registrationForm.email) }}
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingUsername" placeholder="Username" {{ form_widget(registrationForm.username) }}
+        </div>
+        <div class="form-floating">
+            {{ form_errors(registrationForm.plainPassword) }}
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" {{ form_widget(registrationForm.plainPassword) }}
+        </div>
+        <div class="checkbox mb-3">
+            {{ form_row(registrationForm.agreeTerms) }}
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign UP</button>
+        {{ form_end(registrationForm) }}
+    </form>
+</main>
+
+</body>
+{% endblock %}
+
+
+
